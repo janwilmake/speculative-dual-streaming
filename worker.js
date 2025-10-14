@@ -2,6 +2,23 @@
 
 export default {
   async fetch(request, env, ctx) {
+    if (
+      request.headers.get("Authorization")?.slice(0, "Bearer ".length) !==
+      env.SECRET
+    ) {
+      return new Response(
+        JSON.stringify({
+          error: {
+            message: "Incorrect secret in authorization bearer",
+            type: "authentication_error",
+          },
+        }),
+        {
+          status: 401,
+          headers: { "Content-Type": "application/json" },
+        }
+      );
+    }
     // Only handle POST requests to /chat/completions
     if (
       request.method !== "POST" ||

@@ -7,13 +7,13 @@ Try it:
 This should use Parallel Search:
 
 ```
-curl -s -N -H "Content-Type: application/json" -d '{"model":"gpt-4","messages":[{"role":"user","content":"What is the current weather in New York?"}],"stream":true}' https://maybesearch.p0web.com/chat/completions -i | awk '/^x-/{print} /^data: /{gsub(/^data: /,""); if($0!="[DONE]") {gsub(/[\x00-\x1F]/, "", $0); system("echo '"'"'"$0"'"'"' | jq -r \".choices[0].delta.content // empty\" 2>/dev/null | tr -d \"\\n\"")}}' && echo
+curl -s -N -H "Authorization: Bearer SECRET" -d '{"model":"gpt-4","messages":[{"role":"user","content":"What is the current weather in New York?"}],"stream":true}' https://maybesearch.p0web.com/chat/completions -i | awk '/^x-/{print} /^data: /{gsub(/^data: /,""); if($0!="[DONE]") {gsub(/[\x00-\x1F]/, "", $0); system("echo '"'"'"$0"'"'"' | jq -r \".choices[0].delta.content // empty\" 2>/dev/null | tr -d \"\\n\"")}}' && echo
 ```
 
 This should use OpenAI:
 
 ```
-curl -s -N -H "Content-Type: application/json" -d '{"model":"gpt-4","messages":[{"role":"user","content":"Write a paragraph about the capital of france"}],"stream":true}' https://maybesearch.p0web.com/chat/completions -i | awk '/^x-/{print} /^data: /{gsub(/^data: /,""); if($0!="[DONE]") {gsub(/[\x00-\x1F]/, "", $0); system("echo '"'"'"$0"'"'"' | jq -r \".choices[0].delta.content // empty\" 2>/dev/null | tr -d \"\\n\"")}}' && echo
+curl -s -N -H "Authorization: Bearer SECRET" -d '{"model":"gpt-4","messages":[{"role":"user","content":"Write a paragraph about the capital of france"}],"stream":true}' https://maybesearch.p0web.com/chat/completions -i | awk '/^x-/{print} /^data: /{gsub(/^data: /,""); if($0!="[DONE]") {gsub(/[\x00-\x1F]/, "", $0); system("echo '"'"'"$0"'"'"' | jq -r \".choices[0].delta.content // empty\" 2>/dev/null | tr -d \"\\n\"")}}' && echo
 ```
 
 ```mermaid path="proxy-flow-diagram.mmd"
