@@ -2,7 +2,7 @@
 
 This POC shows a Cloudflare Worker that intelligently routes chat completion requests between OpenAI and Parallel AI based on whether the query requires web search or real-time information. The TTFT is delayed by the decision prompt, but we instantly stream and buffer both chat completions from the start, such that the TTLT (time to last token) does not change!
 
-Try it:
+Try it (ensure to have the right secret):
 
 This should use Parallel Search:
 

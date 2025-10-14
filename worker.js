@@ -3,7 +3,7 @@
 export default {
   async fetch(request, env, ctx) {
     if (
-      request.headers.get("Authorization")?.slice(0, "Bearer ".length) !==
+      request.headers.get("Authorization")?.slice("Bearer ".length) !==
       env.SECRET
     ) {
       return new Response(
